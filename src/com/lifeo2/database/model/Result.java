@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class Result {
-	
+	@JsonProperty("Patient")
 	public Patient patient;
+	@JsonProperty("Doctor")
 	public Doctor doctor;
+	@JsonProperty("SuperAdmin")
 	public SuperAdmin rootuser;
 	public List<HashMap<String, String>> hospitalList;
 	public static final String SUCCESS = "success";

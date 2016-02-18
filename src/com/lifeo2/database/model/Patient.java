@@ -8,11 +8,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  * @author erasent
  *
  */
+
 public class Patient extends User {
 
 	/**
@@ -96,7 +98,6 @@ public class Patient extends User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
 	public Patient() {
 		// TODO Auto-generated constructor stub
 	}

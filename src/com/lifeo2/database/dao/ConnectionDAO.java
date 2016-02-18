@@ -26,7 +26,7 @@ public class ConnectionDAO {
             }
 			dbDriverClassName = PropsUtil.getValue("jdbc.driver.class.name");
 			local = PropsUtil.getValue("environment").equalsIgnoreCase("local")?true:false;
-			//local=true;
+			local=true;
 			if(local){
 				dbHost = PropsUtil.getValue("jdbc.host");
 				dbPort = PropsUtil.getValue("jdbc.port");
