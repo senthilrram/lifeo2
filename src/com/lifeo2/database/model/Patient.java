@@ -9,13 +9,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.annotate.JsonTypeName;
+import org.codehaus.jackson.map.annotate.JsonRootName;
 
 /**
  * @author erasent
  *
  */
-
-public class Patient extends User {
+@JsonRootName("Patient")
+public class Patient  {
 
 	/**
 	 * 

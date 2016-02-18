@@ -18,6 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.google.gson.Gson;
 import com.lifeo2.database.dao.HospitalDAO;
 import com.lifeo2.database.dao.UserDAO;
 import com.lifeo2.database.model.Doctor;
@@ -56,19 +57,20 @@ public class UserService {
 	public Response doAuth(@HeaderParam("authorization") String authString)
 			 {
 		Result resultJSON = new Result();
+		 Gson gson = new Gson();
 		try
 		{
 			if(authString != null && authString != "")
 			{
 				System.out.println("Authorization String received from the Header is:" + authString);
 				doRetrieveSetUserNamePassword(authString);
-				return Response.status(200).entity(isUserAuthenticated(userName,passWord)).build();
+				return Response.status(200).entity(gson.toJson(isUserAuthenticated(userName,passWord))).build();
 			}
 			else
 			{
 				resultJSON.setMessage("Unauthorized access:Please check with Administrator");
 				resultJSON.setType(Result.SUCCESS);
-				return  Response.status(200).entity(resultJSON).build();
+				return  Response.status(200).entity(gson.toJson(resultJSON)).build();
 			}
 		}
 		catch(JSONException jsonexe)
@@ -76,20 +78,23 @@ public class UserService {
 			System.out.println("JSONException at doAuth");
 			jsonexe.printStackTrace();
 			resultJSON.setType(Result.ERROR).setMessage("Please contact system administrator for the issue:"+jsonexe.getMessage());
+			
 		}
 		catch(SQLException sqlexe)
 		{
 			System.out.println("SQLException at doAuth");
 			sqlexe.printStackTrace();
 			resultJSON.setType(Result.ERROR).setMessage("Please contact system administrator for the issue:"+sqlexe.getMessage());
+			
 		}
 		catch (Exception exe)
 		{
 			System.out.println("Exception at doAuth");
 			exe.printStackTrace();
 			resultJSON.setType(Result.ERROR).setMessage("Please contact system administrator for the issue:"+exe.getMessage());
+			
 		}
-		return null;
+		return  Response.status(200).entity(gson.toJson(resultJSON)).build();
 		
 		
 		
@@ -101,6 +106,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addUser(final User user){
 		Result resultJSON = new Result();
+		Gson gson = new Gson();
 		try
 		{
 			System.out.println(user.getUsername()+user.getPassword()+user.getUserType());
@@ -114,7 +120,7 @@ public class UserService {
 				}
 					
 				else
-					return Response.status(200).entity(UserDAO.addNewUser(user)).build();
+					return Response.status(200).entity(gson.toJson(UserDAO.addNewUser(user))).build();
 					
 				
 			}
@@ -138,7 +144,7 @@ public class UserService {
 			resultJSON.setType(Result.ERROR).setMessage("Please contact system administrator for the issue:"+exe.getMessage());
 			
 		}
-		return Response.status(200).entity(resultJSON).build();
+		return Response.status(200).entity(gson.toJson(resultJSON)).build();
 		
 	}
 	
@@ -198,10 +204,11 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retreiveHospitalDetails(){
 		Result resultJSON = new Result();
+		Gson gson = new Gson();
 		try
 		{
 				System.out.println("retrieving the Hospital Details:");
-				return Response.status(200).entity(HospitalDAO.getHospitalDetails()).build();
+				return Response.status(200).entity(gson.toJson(HospitalDAO.getHospitalDetails())).build();
 			
 		}
 		catch(JSONException jsonexe)
@@ -223,7 +230,7 @@ public class UserService {
 			resultJSON.setType(Result.ERROR).setMessage("Please contact system administrator for the issue:"+exe.getMessage());
 			
 		}
-		return Response.status(200).entity(resultJSON).build();
+		return Response.status(200).entity(gson.toJson(resultJSON)).build();
 		
 	}
 	
@@ -232,10 +239,11 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retreiveUserDetails(@PathParam("username") String username, @PathParam("password") String password){
 		Result resultJSON = new Result();
+		Gson gson = new Gson();
 		try
 		{
 				System.out.println("retrieving the User Details for showing before profile update:"+username+":"+password);
-				return Response.status(200).entity(UserDAO.getUserDetails(username,password)).build();
+				return Response.status(200).entity(gson.toJson(UserDAO.getUserDetails(username,password))).build();
 			
 		}
 		catch(JSONException jsonexe)
@@ -257,7 +265,7 @@ public class UserService {
 			resultJSON.setType(Result.ERROR).setMessage("Please contact system administrator for the issue:"+exe.getMessage());
 			
 		}
-		return Response.status(200).entity(resultJSON).build();
+		return Response.status(200).entity(gson.toJson(resultJSON)).build();
 		
 	}
 	@Path("/updateProfile")
@@ -265,6 +273,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response UpdateUser(final User user){
 		Result resultJSON = new Result();
+		Gson gson = new Gson();
 		try
 		{
 			if(user!=null){
@@ -272,12 +281,12 @@ public class UserService {
 				if(user.getUserId() == null || user.getUserId()== "")
 				{
 					resultJSON.setType(Result.ERROR).setMessage("User Id is mandatory to perform update");
-					return Response.status(200).entity(resultJSON).build();
+					return Response.status(200).entity(gson.toJson(resultJSON)).build();
 				}
 				if(user.getUserType() != null && user.getUserType()!= "")
 				{
 					resultJSON.setType(Result.ERROR).setMessage("User Type cannot be updated:Please consider registering another account");
-					return Response.status(200).entity(resultJSON).build();
+					return Response.status(200).entity(gson.toJson(resultJSON)).build();
 				}
 				
 			/*	if(user.getPatient() != null)
@@ -307,7 +316,7 @@ public class UserService {
 						return Response.status(200).entity(resultJSON).build();
 					}
 				}*/
-				return Response.status(200).entity(UserDAO.updateUser(user)).build();
+				return Response.status(200).entity(gson.toJson(UserDAO.updateUser(user))).build();
 			}
 		}
 		catch(JSONException jsonexe)
@@ -334,7 +343,7 @@ public class UserService {
 			System.out.println("Finally");
 			
 		}
-		return Response.status(200).entity(resultJSON).build();
+		return Response.status(200).entity(gson.toJson(resultJSON)).build();
 	}
 		
 	private void doRetrieveSetUserNamePassword(String authString) {

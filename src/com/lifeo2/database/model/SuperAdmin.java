@@ -3,13 +3,12 @@
  */
 package com.lifeo2.database.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author erasent
  *
  */
-public class SuperAdmin extends User{
+public class SuperAdmin{
 
 	/**
 	 * 

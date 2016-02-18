@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author erasent
  *
  */
-public class Doctor extends User {
+public class Doctor{
 
 	
 	/**

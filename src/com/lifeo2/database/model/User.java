@@ -2,14 +2,12 @@
  * 
  */
 package com.lifeo2.database.model;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.annotate.JsonTypeName;
+import org.codehaus.jackson.map.annotate.JsonRootName;
+
+
 
 /**
  * @author erasent
@@ -24,7 +22,7 @@ public class User {
 	 private String password	="";
 	 private String userType	="";
 	 
-	 @JsonProperty("Patient")
+	 @JsonProperty("Patien")
 	 private Patient patient;
 	 
 	 @JsonProperty("Doctor")

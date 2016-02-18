@@ -49,10 +49,10 @@ public class UserDAO extends ConnectionDAO{
     			if(rs.getString(4).equalsIgnoreCase("Patient"))
     			{
     				Patient patient = new Patient();
-    				patient.setUsername(rs.getString(1));
-    				patient.setPassword(rs.getString(2));
+    				//patient.setUsername(rs.getString(1));
+    				//patient.setPassword(rs.getString(2));
     				patient.setUserId(rs.getString(3));
-    				patient.setUserType(rs.getString(4));
+    				//patient.setUserType(rs.getString(4));
     				
     				rsnew = stmt.executeQuery(String.format(QUERY_PATIENT_DETAILS, rs.getString(3)));
     			        				
@@ -68,7 +68,7 @@ public class UserDAO extends ConnectionDAO{
         				patient.setAlternate_mobile_number(rsnew.getString(8));
         				patient.setEmail(rsnew.getString(9));
         				patient.setAddress(rsnew.getString(10));
-        				System.out.println(patient.getPassword()+patient.getFirst_name());
+        				//System.out.println(patient.getPassword()+patient.getFirst_name());
         				
         				result.patient=patient;
         				result.setMessage("Patient Successfully Logged in ");
@@ -89,10 +89,10 @@ public class UserDAO extends ConnectionDAO{
     			else if(rs.getString(4).equalsIgnoreCase("Doctor"))
     			{
     				Doctor doctor = new Doctor();
-    				doctor.setUsername(rs.getString(1));
-    				doctor.setPassword(rs.getString(2));
+    				//doctor.setUsername(rs.getString(1));
+    				//doctor.setPassword(rs.getString(2));
     				doctor.setUserId(rs.getString(3));
-    				doctor.setUserType(rs.getString(4));
+    				//doctor.setUserType(rs.getString(4));
     				System.out.println("UserId:"+ rs.getString(3));
     				rsnew = stmt.executeQuery(String.format(QUERY_DOCTOR_DETAILS, rs.getString(3)));
     				if(rsnew.first())
@@ -107,7 +107,7 @@ public class UserDAO extends ConnectionDAO{
         				doctor.setMobile_number(rsnew.getString(8));
         				doctor.setAlternate_mobile_number(rsnew.getString(9));
         				doctor.setEmail(rsnew.getString(12));
-        				System.out.println(doctor.getPassword()+doctor.getFirst_name());
+        				//System.out.println(doctor.getPassword()+doctor.getFirst_name());
         				result.doctor=doctor;
         				result.setMessage("Doctor Successfully Logged in ");
         				result.setType(Result.SUCCESS);
@@ -126,10 +126,10 @@ public class UserDAO extends ConnectionDAO{
     			else if(rs.getString(4).equalsIgnoreCase("SuperAdmin"))
     			{
     				SuperAdmin superadmin = new SuperAdmin();
-    				superadmin.setUsername(rs.getString(1));
-    				superadmin.setPassword(rs.getString(2));
+    				//superadmin.setUsername(rs.getString(1));
+    				//superadmin.setPassword(rs.getString(2));
     				superadmin.setUserId(rs.getString(3));
-    				superadmin.setUserType(rs.getString(4));
+    				//superadmin.setUserType(rs.getString(4));
     				
     				rsnew = stmt.executeQuery(String.format(QUERY_SUPERADMIN_DETAILS, rs.getString(3)));
     				if(rsnew.first())
@@ -390,10 +390,10 @@ public class UserDAO extends ConnectionDAO{
     			if(rs.getString(4).equalsIgnoreCase("Patient"))
     			{
     				Patient patient = new Patient();
-    				patient.setUsername(rs.getString(1));
-    				patient.setPassword(rs.getString(2));
+    				//patient.setUsername(rs.getString(1));
+    				//patient.setPassword(rs.getString(2));
     				patient.setUserId(rs.getString(3));
-    				patient.setUserType(rs.getString(4));
+    				//patient.setUserType(rs.getString(4));
     				
     				rsnew = stmt.executeQuery(String.format(QUERY_PATIENT_DETAILS, rs.getString(3)));
     			        				
@@ -409,7 +409,7 @@ public class UserDAO extends ConnectionDAO{
         				patient.setAlternate_mobile_number(rsnew.getString(8));
         				patient.setEmail(rsnew.getString(9));
         				patient.setAddress(rsnew.getString(10));
-        				System.out.println(patient.getPassword()+patient.getFirst_name());
+        				//System.out.println(patient.getPassword()+patient.getFirst_name());
         				
         				result.patient=patient;
         				result.setMessage("Patient data ");
@@ -430,10 +430,10 @@ public class UserDAO extends ConnectionDAO{
     			else if(rs.getString(4).equalsIgnoreCase("Doctor"))
     			{
     				Doctor doctor = new Doctor();
-    				doctor.setUsername(rs.getString(1));
-    				doctor.setPassword(rs.getString(2));
+    				//doctor.setUsername(rs.getString(1));
+    				//doctor.setPassword(rs.getString(2));
     				doctor.setUserId(rs.getString(3));
-    				doctor.setUserType(rs.getString(4));
+    				//doctor.setUserType(rs.getString(4));
     				System.out.println("UserId:"+ rs.getString(3));
     				rsnew = stmt.executeQuery(String.format(QUERY_DOCTOR_DETAILS, rs.getString(3)));
     				if(rsnew.first())
@@ -448,7 +448,7 @@ public class UserDAO extends ConnectionDAO{
         				doctor.setMobile_number(rsnew.getString(8));
         				doctor.setAlternate_mobile_number(rsnew.getString(9));
         				doctor.setEmail(rsnew.getString(12));
-        				System.out.println(doctor.getPassword()+doctor.getFirst_name());
+        				//System.out.println(doctor.getPassword()+doctor.getFirst_name());
         				result.doctor=doctor;
         				result.setMessage("Doctor data");
         				result.setType(Result.SUCCESS);
@@ -467,10 +467,10 @@ public class UserDAO extends ConnectionDAO{
     			else if(rs.getString(4).equalsIgnoreCase("SuperAdmin"))
     			{
     				SuperAdmin superadmin = new SuperAdmin();
-    				superadmin.setUsername(rs.getString(1));
-    				superadmin.setPassword(rs.getString(2));
+    				//superadmin.setUsername(rs.getString(1));
+    				//superadmin.setPassword(rs.getString(2));
     				superadmin.setUserId(rs.getString(3));
-    				superadmin.setUserType(rs.getString(4));
+    				//superadmin.setUserType(rs.getString(4));
     				
     				rsnew = stmt.executeQuery(String.format(QUERY_SUPERADMIN_DETAILS, rs.getString(3)));
     				if(rsnew.first())
