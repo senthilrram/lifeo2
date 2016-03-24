@@ -4,9 +4,15 @@
 package com.lifeo2.database.dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import com.lifeo2.database.model.Doctor;
 import com.lifeo2.database.model.Result;
 import com.lifeo2.database.model.User;
 
@@ -14,9 +20,11 @@ import com.lifeo2.database.model.User;
  * @author erasent
  *
  */
-public class DoctorDAO {
+public class DoctorDAO extends ConnectionDAO{
 
 	private static final String UDATE_DOCTOR_DETAILS_TABLE = "UPDATE Doctors SET ";
+	private static final String SELECT_ALL_DOCTORS = "SELECT * FROM Doctors";
+	
 	/**
 	 * 
 	 */
@@ -77,4 +85,63 @@ public class DoctorDAO {
     	
     }
 
+	public static Result getAllDoctors() throws SQLException {
+		
+		Connection connection = getConnection();
+		Result result = new Result();
+		Statement stmt = connection.createStatement();
+		try {
+        	
+        	ResultSet rs = stmt.executeQuery(SELECT_ALL_DOCTORS);
+        	List<Doctor> returnList=convertResultSetToDoctorsList(rs);
+        	rs.close();
+        	if(returnList.size() > 0)
+        	{
+        		result.setMessage("Retrieve doctors list success");
+				result.setType(Result.SUCCESS);
+        		result.doctorsList=returnList;
+        		return result;
+        	}
+        	else
+        	{
+        		result.setMessage("Retrieve doctors list failed:");
+				result.setType(Result.ERROR);
+				return  result;
+        		
+        	}
+           
+        }
+        finally
+        {
+        	System.out.println("finally");
+        	
+        	if(stmt != null)
+        		connection.close();
+        }
+    	
+    }
+	
+	public static List<Doctor> convertResultSetToDoctorsList(ResultSet rs) throws SQLException {
+	    List<Doctor> list = new ArrayList<Doctor>();
+
+	    while (rs.next()) {
+	        Doctor d = new Doctor();
+	        
+	        d.setDoctorid(Integer.toString(rs.getInt(1)));
+	        d.setHospitalid(Integer.toString(rs.getInt(2)));
+	        d.setUserId(Integer.toString(rs.getInt(3)));
+	        d.setExperience(Integer.toString(rs.getInt(4)));
+	        d.setQualification(rs.getString(5));
+	        d.setFirst_name(rs.getString(6));
+	        d.setLast_name(rs.getString(7));
+	        d.setDob(rs.getDate(8).toString());
+	        d.setMobile_number(Double.toString(rs.getDouble(9)));
+	        d.setAlternate_mobile_number(Double.toString(rs.getDouble(10)));
+	        d.setEmail(rs.getString(11));
+	        
+	        list.add(d);
+	    }
+
+	    return list;
+	}
 }
