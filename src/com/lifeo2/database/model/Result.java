@@ -16,6 +16,7 @@ public class Result {
 	public SuperAdmin rootuser;
 	public List<HashMap<String, String>> hospitalList;
 	public List<Doctor> doctorsList;
+	public List<Department> departmentsList;
 	public static final String SUCCESS = "success";
 	public static final String ERROR = "error";
 	

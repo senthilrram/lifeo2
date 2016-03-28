@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -59,6 +60,41 @@ public class DoctorService {
 		catch (Exception exe)
 		{
 			System.out.println("Exception at getAllDoctors");
+			exe.printStackTrace();
+			resultJSON.setType(Result.ERROR).setMessage("Please contact system administrator for the issue:"+exe.getMessage());
+			
+		}
+		return Response.status(200).entity(gson.toJson(resultJSON)).build();
+		
+	}
+	
+	@Path("/list/{deptid}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllDoctorsByDeptId(@PathParam("deptid") String deptId){
+		Result resultJSON = new Result();
+		Gson gson = new Gson();
+		try
+		{
+				System.out.println("retrieving the doctors list:");
+				return Response.status(200).entity(gson.toJson(DoctorDAO.getAllDoctorsByDepartmentId(deptId))).build();
+			
+		}
+		catch(JSONException jsonexe)
+		{
+			System.out.println("JSONException at getAllDoctors by dept id");
+			jsonexe.printStackTrace();
+			resultJSON.setType(Result.ERROR).setMessage("Please contact system administrator for the issue:"+jsonexe.getMessage());
+		}
+		catch(SQLException sqlexe)
+		{
+			System.out.println("SQLException at getAllDoctors  by dept id");
+			sqlexe.printStackTrace();
+			resultJSON.setType(Result.ERROR).setMessage("Please contact system administrator for the issue:"+sqlexe.getMessage());
+		}
+		catch (Exception exe)
+		{
+			System.out.println("Exception at getAllDoctors  by dept id");
 			exe.printStackTrace();
 			resultJSON.setType(Result.ERROR).setMessage("Please contact system administrator for the issue:"+exe.getMessage());
 			

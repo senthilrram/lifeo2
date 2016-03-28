@@ -28,6 +28,7 @@ public class Doctor{
 	private String available_start_time     ="";
 	private String available_end_time       ="";
 	private String email                    ="";
+	private String departmentid				="";
 	public String getDoctorid() {
 		return doctorid;
 	}
@@ -106,8 +107,14 @@ public class Doctor{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getDepartmentid() {
+		return departmentid;
+	}
+	public void setDepartmentid(String departmentid) {
+		this.departmentid = departmentid;
+	}
 	public Doctor() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 }
